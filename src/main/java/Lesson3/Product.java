@@ -1,12 +1,12 @@
 package Lesson3;
 
 public class Product {
-    String name;
-    String manufactureDate;
-    String manufacturer;
-    String country;
-    int price;
-    boolean reserved;
+    private String  name;
+    private String manufactureDate;
+    private String manufacturer;
+    private String country;
+    private int price;
+    private boolean reserved;
 
     public Product(String name, String manufactureDate, String manufacturer, String country, int price, boolean reserved) {
         this.name = name;
@@ -16,13 +16,14 @@ public class Product {
         this.price = price;
         this.reserved = reserved;
     }
-    public void printInfo() {
-        System.out.println("Название: " + name);
-        System.out.println("Дата производства: " + manufactureDate);
-        System.out.println("Производитель: " + manufacturer);
-        System.out.println("Страна: " + country);
-        System.out.println("Цена: " + price + " руб.");
-        System.out.println("Забронирован: " + (reserved ? "Да" : "Нет"));
-        System.out.println("-----------------------------");
+
+    @Override
+    public String toString(){
+         return "Название: " + name +
+                ", Дата: " + manufactureDate +
+                ", Производитель: " + manufacturer +
+                ", Страна: " + country +
+                ", Цена: " + price +
+                ", Забронирован: " + (reserved ? "Да" : "Нет");
     }
 }

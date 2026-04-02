@@ -15,12 +15,12 @@ public class main {
                 "Dell Inc.", "USA", 4999, false);
 
         for (int i = 0; i < productsArray.length; i++) {
-            productsArray[i].printInfo();
+            System.out.println(productsArray[i]);;
         }
 
         Park myPark = new Park();
 
         Park.Attraction a1 = myPark.new Attraction("Американские горки", "10:00 - 20:00", 500);
-        a1.printInfo();
+        System.out.println(a1);
     }
 }
