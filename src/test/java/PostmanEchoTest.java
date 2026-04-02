@@ -56,6 +56,22 @@ public class PostmanEchoTest {
     }
 
     @Test
+    public void testPostFormData() {
+
+        given()
+                .multiPart("name", "Sultan")
+                .multiPart("job", "AQA")
+
+                .when()
+                .post("https://postman-echo.com/post")
+
+                .then()
+                .statusCode(200)
+                .body("form.name", equalTo("Sultan"))
+                .body("form.job", equalTo("AQA"));
+    }
+
+    @Test
     public void testPut() {
 
         String body = "{ \"name\": \"Sultan\" }";
