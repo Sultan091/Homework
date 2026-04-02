@@ -3,7 +3,6 @@ package Lesson4.animals;
 public class Bowl {
 
     private int food;
-
     public Bowl(int food) {
 
         this.food = food;
