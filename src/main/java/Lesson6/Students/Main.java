@@ -6,6 +6,7 @@ public class Main {
 
     public static void main(String[] args) {
 
+        StudentService service = new StudentService();
         Set<Student> students = new HashSet<>();
 
         students.add(new Student("Иван", "A1", 1, Arrays.asList(4, 5, 3)));
@@ -14,16 +15,16 @@ public class Main {
         students.add(new Student("Олег", "B1", 2, Arrays.asList(2, 3, 2)));
 
         System.out.println("До удаления:");
-        StudentService.printStudents(students, 1);
+        service.printStudents(students, 1);
 
-        StudentService.removeBadStudents(students);
+        service.removeBadStudents(students);
 
         System.out.println("\nПосле удаления:");
-        StudentService.printStudents(students, 1);
+        service.printStudents(students, 1);
 
-        StudentService.promoteStudents(students);
+        service.promoteStudents(students);
 
         System.out.println("\nПосле перевода на следующий курс:");
-        StudentService.printStudents(students, 2);
+        service.printStudents(students, 2);
     }
 }
