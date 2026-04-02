@@ -2,7 +2,7 @@ package Lesson7;
 
 public class Factorial {
 
-    public static int calculate(int n) {
+    public int calculate(int n) {
         if (n < 0) {
             throw new IllegalArgumentException("Число не может быть отрицательным");
         }

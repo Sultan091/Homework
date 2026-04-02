@@ -4,15 +4,17 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class CalculatorTest {
 
+    Calculator calculator = new Calculator();
+
     @Test
     void testAll(){
-        assertEquals(5, Calculator.add(2, 3));
+        assertEquals(5, calculator.add(2, 3));
     }
 
     @Test
     void testDivideByZero(){
         assertThrows(ArithmeticException.class, () -> {
-            Calculator.divide(10, 0);
+            calculator.divide(10, 0);
         });
     }
 }
