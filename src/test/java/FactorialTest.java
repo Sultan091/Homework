@@ -3,13 +3,15 @@ import org.testng.annotations.Test;
 import static org.testng.Assert.*;
 
 public class FactorialTest {
+
+    Factorial factorial = new Factorial();
     @Test
     public void testFactorial(){
-        assertEquals(Factorial.calculate(5), 120);
+        assertEquals(factorial.calculate(5), 120);
     }
 
     @Test(expectedExceptions = IllegalArgumentException.class)
         public void testNegative(){
-            Factorial.calculate(-1);
+            factorial.calculate(-1);
     }
 }

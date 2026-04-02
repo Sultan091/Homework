@@ -2,7 +2,7 @@ package Lesson7;
 
 public class Triangle {
 
-    public static double area(double a, double b, double c) {
+    public double area(double a, double b, double c) {
         if (a <= 0 || b <= 0 || c <= 0) {
             throw new IllegalArgumentException("Стороны должны быть > 0");
         }
