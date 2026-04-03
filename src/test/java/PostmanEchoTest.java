@@ -12,10 +12,8 @@ public class PostmanEchoTest {
         given()
                 .queryParam("foo1", "bar1")
                 .queryParam("foo2", "bar2")
-
                 .when()
                 .get("https://postman-echo.com/get")
-
                 .then()
                 .statusCode(200)
                 .body("args.foo1", equalTo("bar1"))
@@ -27,10 +25,8 @@ public class PostmanEchoTest {
 
         given()
                 .queryParam("foo", "bar")
-
                 .when()
                 .get("https://postman-echo.com/get")
-
                 .then()
                 .statusCode(200)
                 .body("args.foo", equalTo("bar"))
@@ -45,10 +41,8 @@ public class PostmanEchoTest {
         given()
                 .contentType("application/json")
                 .body(body)
-
                 .when()
                 .post("https://postman-echo.com/post")
-
                 .then()
                 .statusCode(200)
                 .body("data.name", equalTo("Sultan"))
@@ -61,10 +55,8 @@ public class PostmanEchoTest {
         given()
                 .multiPart("name", "Sultan")
                 .multiPart("job", "AQA")
-
                 .when()
                 .post("https://postman-echo.com/post")
-
                 .then()
                 .statusCode(200)
                 .body("form.name", equalTo("Sultan"))
@@ -79,10 +71,8 @@ public class PostmanEchoTest {
         given()
                 .contentType("application/json")
                 .body(body)
-
                 .when()
                 .put("https://postman-echo.com/put")
-
                 .then()
                 .statusCode(200)
                 .body("data.name", equalTo("Sultan"));
@@ -96,10 +86,8 @@ public class PostmanEchoTest {
         given()
                 .contentType("application/json")
                 .body(body)
-
                 .when()
                 .patch("https://postman-echo.com/patch")
-
                 .then()
                 .statusCode(200)
                 .body("data.age", equalTo(30));
@@ -109,10 +97,8 @@ public class PostmanEchoTest {
     public void testDelete() {
 
         given()
-
                 .when()
                 .delete("https://postman-echo.com/delete")
-
                 .then()
                 .statusCode(200);
     }
