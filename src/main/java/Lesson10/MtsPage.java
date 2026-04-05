@@ -3,6 +3,8 @@ package Lesson10;
 import java.time.Duration;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.TimeoutException;
@@ -16,7 +18,6 @@ public class MtsPage {
     private final WebDriverWait wait;
 
     private final By blockTitle = By.xpath("//section[@class='pay']//h2[contains(text(),'Онлайн пополнение')]");
-    private final By paymentLogosBlock = By.xpath("//section[@class='pay']");
     private final By visaLogo = By.xpath("//section[@class='pay']//img[@alt='Visa']");
     private final By verifiedVisaLogo = By.xpath("//section[@class='pay']//img[@alt='Verified By Visa']");
     private final By masterCardLogo = By.xpath("//section[@class='pay']//img[@alt='MasterCard']");
@@ -43,22 +44,42 @@ public class MtsPage {
             return false;
         }
     }
+
+    @Step("Проверка отображения заголовка блока 'Онлайн пополнение'")
     public boolean isBlockTitleDisplayed() { return isElementVisible(blockTitle); }
+
+    @Step("Проверка отображения логотипа Visa")
     public boolean isVisaLogoDisplayed() { return isElementVisible(visaLogo); }
+
+    @Step("Проверка отображения логотипа Verified By Visa")
     public boolean isVerifiedVisaLogoDisplayed() { return isElementVisible(verifiedVisaLogo); }
+
+    @Step("Проверка отображения логотипа MasterCard")
     public boolean isMasterCardLogoDisplayed() { return isElementVisible(masterCardLogo); }
+
+    @Step("Проверка отображения логотипа Secure Code")
     public boolean isSecureCodeLogoDisplayed() { return isElementVisible(secureCodeLogo); }
+
+    @Step("Проверка отображения логотипа Белкарт")
     public boolean isBelkartLogoDisplayed() { return isElementVisible(belkartLogo); }
+
+    @Step("Принятие cookie")
     public void clickCookieAgreeButton() {
         try {
             wait.until(ExpectedConditions.elementToBeClickable(cookiesAgreeButton)).click();
         } catch (Exception ignored) {}
     }
 
+    @Step("Нажатие на ссылку 'Подробнее о сервисе'")
     public void clickMoreInfoLink() { wait.until(ExpectedConditions.elementToBeClickable(moreInfoLink)).click(); }
+
+    @Step("Ожидание, пока URL будет содержать: {text}")
     public void waitForUrlContains(String text) { wait.until(ExpectedConditions.urlContains(text)); }
+
+    @Step("Открытие выпадающего списка услуг")
     public void openServiceDropdown() { wait.until(ExpectedConditions.elementToBeClickable(serviceDropdown)).click(); }
 
+    @Step("Получение списка доступных услуг")
     public List<String> getServiceOptionsText() {
         return wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(serviceOptions))
                 .stream().map(WebElement::getText).collect(Collectors.toList());
@@ -68,21 +89,25 @@ public class MtsPage {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(serviceDropdownContainer));
     }
 
+    @Step("Скролл к элементу")
     public void scrollToElement(WebElement element) {
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block: 'center'});", element);
     }
 
+    @Step("Ввод номера телефона: {phone}")
     public void enterPhone(String phone) {
         WebElement input = wait.until(ExpectedConditions.visibilityOfElementLocated(phoneInput));
         input.clear();
         input.sendKeys(phone);
     }
 
+    @Step("Ввод суммы: {sum}")
     public void enterSum(String sum) {
         WebElement input = wait.until(ExpectedConditions.visibilityOfElementLocated(sumInput));
         input.clear();
         input.sendKeys(sum);
     }
 
+    @Step("Нажатие кнопки 'Продолжить'")
     public void clickContinue() { wait.until(ExpectedConditions.elementToBeClickable(continueButton)).click(); }
 }

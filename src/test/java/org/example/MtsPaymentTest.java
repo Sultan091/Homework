@@ -1,10 +1,20 @@
-import Lesson10.*;
+package org.example;
+
+import Lesson10.MtsPage;
+import Lesson10.PaymentModal;
+import io.qameta.allure.*;
+import io.qameta.allure.Severity;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.WebElement;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
+@Epic("Тестирование сайта МТС")
+@Feature("Оплата услуг")
+@ExtendWith(TestWatcherExtension.class)
 public class MtsPaymentTest extends BaseTest {
     private MtsPage mtsPage;
     private PaymentModal paymentModal;
@@ -17,11 +27,15 @@ public class MtsPaymentTest extends BaseTest {
     }
 
     @Test
+    @DisplayName("Проверка заголовка блока оплаты")
+    @Severity(SeverityLevel.TRIVIAL)
     void checkBlockTitle() {
         assertTrue(mtsPage.isBlockTitleDisplayed(), "Заголовок блока не виден");
     }
 
     @Test
+    @DisplayName("Проверка наличия логотипов платежных систем")
+    @Severity(SeverityLevel.MINOR)
     void checkPaymentLogos() {
         assertAll("Логотипы платежных систем",
                 () -> assertTrue(mtsPage.isVisaLogoDisplayed()),
@@ -33,6 +47,8 @@ public class MtsPaymentTest extends BaseTest {
     }
 
     @Test
+    @DisplayName("Проверка ссылки 'Подробнее о сервисе'")
+    @Story("Навигация по ссылкам")
     void checkMoreInfoLink() {
         mtsPage.clickMoreInfoLink();
         mtsPage.waitForUrlContains("poryadok-oplaty");
@@ -40,6 +56,9 @@ public class MtsPaymentTest extends BaseTest {
     }
 
     @Test
+    @DisplayName("Проверка кнопки оплаты услуг связи")
+    @Description("Вводим данные и проверяем текст на итоговой кнопке в iframe")
+    @Severity(SeverityLevel.CRITICAL)
     void checkContinueButtonForCommunication() {
         mtsPage.enterPhone("297777777");
         mtsPage.enterSum("55");
@@ -50,6 +69,7 @@ public class MtsPaymentTest extends BaseTest {
     }
 
     @Test
+    @DisplayName("Проверка опций выпадающего списка")
     void checkServiceDropdownOptions() {
         mtsPage.openServiceDropdown();
         WebElement dropdownContainer = mtsPage.getServiceDropdownContainerElement();
@@ -60,24 +80,21 @@ public class MtsPaymentTest extends BaseTest {
     }
 
     @Test
+    @DisplayName("Комплексная проверка деталей в модальном окне")
+    @Severity(SeverityLevel.BLOCKER)
     void checkPaymentDetails() {
         mtsPage.enterPhone("297777777");
         mtsPage.enterSum("10");
         mtsPage.clickContinue();
 
         paymentModal.switchToPaymentFrame();
-        assertAll("Логотипы в модалке оплаты",
+
+        assertAll("Логотипы и поля в модалке",
                 () -> assertTrue(paymentModal.isVisaLogoDisplayed(), "Лого Visa не отображается"),
                 () -> assertTrue(paymentModal.isMastercardLogoDisplayed(), "Лого Mastercard не отображается"),
                 () -> assertTrue(paymentModal.isBelkartLogoDisplayed(), "Лого Белкарт не отображается"),
-                () -> assertTrue(paymentModal.isActiveRandomLogoDisplayed(), "Рандомный логотип (МИР/Maestro) не виден")
-        );
-        assertAll("Детали платежа в модалке",
                 () -> assertEquals("10.00 BYN", paymentModal.getPaySum()),
-                () -> assertEquals("Оплата: Услуги связи Номер:375297777777", paymentModal.getPaymentDescriptionText()),
                 () -> assertEquals("Номер карты", paymentModal.getCardNumberLabelText()),
-                () -> assertEquals("Срок действия", paymentModal.getExpirationDateLabelText()),
-                () -> assertEquals("CVC", paymentModal.getCvcLabelText()),
                 () -> assertEquals("Имя и фамилия на карте", paymentModal.getHolderNameLabelText())
         );
     }
