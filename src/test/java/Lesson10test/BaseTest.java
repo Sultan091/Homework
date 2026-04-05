@@ -1,4 +1,4 @@
-package org.example;
+package Lesson10test;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import io.qameta.allure.Attachment;

@@ -1,4 +1,4 @@
-package org.example;
+package Lesson10test;
 
 import io.qameta.allure.Allure;
 import org.junit.jupiter.api.extension.ExtensionContext;

@@ -1,9 +1,8 @@
-package org.example;
+package Lesson10test;
 
 import Lesson10.MtsPage;
 import Lesson10.PaymentModal;
 import io.qameta.allure.*;
-import io.qameta.allure.Severity;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
