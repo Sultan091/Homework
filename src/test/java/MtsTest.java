@@ -9,10 +9,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class MtsTest {
 
-    WebDriver driver;
+    private WebDriver driver;
 
     @BeforeEach
-    void setUp() {
+    public void setUp() {
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         driver.manage().window().maximize();
@@ -26,18 +26,18 @@ public class MtsTest {
     }
 
     @AfterEach
-    void tearDown() {
+    public void tearDown() {
         driver.quit();
     }
 
     @Test
-    void checkBlockTitle() {
+    public void checkBlockTitle() {
         WebElement title = driver.findElement(By.xpath("//section[@class='pay']//h2"));
         assertTrue(title.getText().contains("Онлайн пополнение"));
     }
 
     @Test
-    void checkPaymentLogos() {
+    public void checkPaymentLogos() {
         List<WebElement> logos = driver.findElements(
                 By.xpath("//div[@class='pay__partners']//img")
         );
@@ -46,7 +46,7 @@ public class MtsTest {
     }
 
     @Test
-    void checkMoreLink() {
+    public void checkMoreLink() {
         WebElement link = driver.findElement(
                 By.xpath("//section[@class='pay']//a")
         );
@@ -55,7 +55,7 @@ public class MtsTest {
     }
 
     @Test
-    void fillFormAndSubmit() {
+    public void fillFormAndSubmit() {
         WebElement phone = driver.findElement(By.id("connection-phone"));
         WebElement sum = driver.findElement(By.id("connection-sum"));
         WebElement email = driver.findElement(By.id("connection-email"));
