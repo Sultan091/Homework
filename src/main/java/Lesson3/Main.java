@@ -1,6 +1,6 @@
 package Lesson3;
 
-public class main {
+public class Main {
     public static void main(String[] args) {
         Product[] productsArray = new Product[5];
         productsArray[0] = new Product("Samsung S25 Ultra", "01.02.2025",
